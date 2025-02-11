@@ -1,24 +1,17 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-let input = [];
-rl.on('line', (line) => {
-    input.push(line);
-    if (input.length === 2) {
-        rl.close();
-    }
-}).on('close', () => {
-    const [n, h] = input[0].split(' ').map(Number);
-    const heights = input[1].split(' ').map(Number);
+function minimumRoadWidth(n, h, heights) {
+    let width = 0;
     
-    let totalWidth = 0;
-    for (const height of heights) {
-        totalWidth += height > h ? 2 : 1;
+    for (let i = 0; i < n; i++) {
+        if (heights[i] > h) {
+            width += 2; // Bending takes 2 width
+        } else {
+            width += 1; // Normal takes 1 width
+        }
     }
     
-    console.log(totalWidth);
-});
+    console.log(width);
+}
+
+const n = 3, h = 7;
+const heights = [4, 5, 14];
+minimumRoadWidth(n, h, heights); 
